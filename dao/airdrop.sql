@@ -43,13 +43,13 @@ INSERT INTO `airdrop_amount` VALUES (1,'0xeD4B0e884A11352c62EFC57aDf0d74c4','1',
 UNLOCK TABLES;
 
 --
--- Table structure for table `project_list`
+-- Table structure for table `airdrop_project_list`
 --
 
-DROP TABLE IF EXISTS `project_list`;
+DROP TABLE IF EXISTS `airdrop_project_list`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `project_list` (
+CREATE TABLE `airdrop_project_list` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `token` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
   `project` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
@@ -62,23 +62,23 @@ CREATE TABLE `project_list` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `project_list`
+-- Dumping data for table `airdrop_project_list`
 --
 
-LOCK TABLES `project_list` WRITE;
-/*!40000 ALTER TABLE `project_list` DISABLE KEYS */;
-INSERT INTO `project_list` VALUES (1,'STC','project1',10,8,'2021-08-25 18:00:00','2020-08-01 18:00:00'),(2,'USDT','project2',9,4,'2021-08-09 20:00:00','2021-08-01 20:00:00'),(3,'STC','project3',11,2,'2021-08-09 20:00:00','2021-08-01 20:00:00');
-/*!40000 ALTER TABLE `project_list` ENABLE KEYS */;
+LOCK TABLES `airdrop_project_list` WRITE;
+/*!40000 ALTER TABLE `airdrop_project_list` DISABLE KEYS */;
+INSERT INTO `airdrop_project_list` VALUES (1,'STC','project1',10,8,'2021-08-25 18:00:00','2020-08-01 18:00:00'),(2,'USDT','project2',9,4,'2021-08-09 20:00:00','2021-08-01 20:00:00'),(3,'STC','project3',11,2,'2021-08-09 20:00:00','2021-08-01 20:00:00');
+/*!40000 ALTER TABLE `airdrop_project_list` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `token_list`
+-- Table structure for table `airdrop_token_list`
 --
 
-DROP TABLE IF EXISTS `token_list`;
+DROP TABLE IF EXISTS `airdrop_token_list`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `token_list` (
+CREATE TABLE `airdrop_token_list` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `symbol` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
   `code` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
@@ -87,13 +87,13 @@ CREATE TABLE `token_list` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `token_list`
+-- Dumping data for table `airdrop_token_list`
 --
 
-LOCK TABLES `token_list` WRITE;
-/*!40000 ALTER TABLE `token_list` DISABLE KEYS */;
-INSERT INTO `token_list` VALUES (1,'STC','0x1::STC::STC\n0x1::STC::STC\n0x1::STC::STC'),(2,'USDT','0xxxxxxx:USDT:USDT\n');
-/*!40000 ALTER TABLE `token_list` ENABLE KEYS */;
+LOCK TABLES `airdrop_token_list` WRITE;
+/*!40000 ALTER TABLE `airdrop_token_list` DISABLE KEYS */;
+INSERT INTO `airdrop_token_list` VALUES (1,'STC','0x1::STC::STC\n0x1::STC::STC\n0x1::STC::STC'),(2,'USDT','0xxxxxxx:USDT:USDT\n');
+/*!40000 ALTER TABLE `airdrop_token_list` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -105,4 +105,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-13 22:28:45
+-- Dump completed on 2021-08-16 15:42:08
