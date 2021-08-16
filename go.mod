@@ -10,6 +10,8 @@ require (
 	github.com/labstack/gommon v0.3.0
 	github.com/spf13/viper v1.8.1 // indirect
 	github.com/stretchr/testify v1.7.0 // indirect
+	github.com/tealeg/xlsx/v3 v3.2.3 // indirect
 	github.com/valyala/fasttemplate v1.2.1 // indirect
+	github.com/xuri/excelize/v2 v2.4.1 // indirect
 	golang.org/x/crypto v0.0.0-20210812204632-0ba0e8f03122 // indirect
 )
