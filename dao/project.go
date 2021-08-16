@@ -18,7 +18,7 @@ type ProjectList []ProjectInfo
 
 func (p ProjectInfo) GetProjectList(status string)(ProjectList, error) {
 	List := ProjectList{}
-	sql := "SELECT p.id, p.token, p.project, p.total_amount, p.valid_amount, p.create_time, p.expire_time FROM starcoin_airdrop.project_list AS p"
+	sql := "SELECT p.id, p.token, p.project, p.total_amount, p.valid_amount, p.create_time, p.expire_time FROM airdrop_project_list AS p"
 	var err error
 	if status == "all" {
 		err = DB.Select(&List, sql)
@@ -36,7 +36,7 @@ func (p ProjectInfo) GetProjectList(status string)(ProjectList, error) {
 func (p ProjectInfo) GetProjectCount(status string) (int32, error) {
 	var count int32
 	var err error
-	sql := "SELECT COUNT(*) FROM project_list"
+	sql := "SELECT COUNT(*) FROM airdrop_project_list"
 	if status == "all" {
 		err = DB.QueryRow(sql).Scan(&count)
 	} else {
@@ -44,7 +44,7 @@ func (p ProjectInfo) GetProjectCount(status string) (int32, error) {
 		err = DB.QueryRow(sql, status).Scan(&count)
 	}
 	if err != nil {
-		log.Error("GetProjectCount Error =>", err)
+		log.Error("GetProje	ctCount Error =>", err)
 		return 0, err
 	}
 	return count, nil

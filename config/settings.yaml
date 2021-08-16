@@ -1,0 +1,10 @@
+app:
+  id:1
+
+db:
+  name: starcoin_airdrop
+  username: root
+  password: Lijiaqi1992
+  port: 3306
+  addr: 127.0.0.1
+
