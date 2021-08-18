@@ -1,5 +1,10 @@
 package dao
 
+import (
+	"github.com/labstack/gommon/log"
+	"strconv"
+)
+
 type Record struct {
 	Id int32 `db:"id"`
 	Address string `db:"address"`
@@ -10,9 +15,11 @@ type Record struct {
 	AirdropId int64 `db:"air_drop_id"`
 	OwnerAddress string `db:"owner_address"`
 	Root string `db:"root"`
-	Status interface{} `db:"status"`
+	Status int32 `db:"status"`
 	Create string `db:"created_at"`
 	Update string `db:"updated_at"`
+	NetworkVersion string `db:"network_version"`
+	End string `db:"end_at"`
 }
 
 type RecordList []Record
@@ -24,5 +31,14 @@ func (r Record) GerRecords (addr string) (RecordList, error) {
 	if err != nil {
 		return nil, err
 	}
+	log.Info("***********>", list[0])
 	return list, nil
+}
+
+func (r Record) UpdateStatus (addr string, id string, status string, networkVersion string) error {
+	recordId,_ := strconv.Atoi(id)
+	recordStatus,_ := strconv.Atoi(status)
+	sql := "UPDATE airdrop_records SET status = ? WHERE address = ? AND id = ? and network_version = ?"
+	_, err := DB.Exec(sql, recordStatus, addr, recordId, networkVersion)
+	return err
 }

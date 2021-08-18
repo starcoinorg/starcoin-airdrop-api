@@ -1,14 +1,11 @@
 package controllers
 
 import (
-	"encoding/json"
 	"github.com/labstack/echo"
 	"github.com/labstack/gommon/log"
-	"io/ioutil"
 	"net/http"
 	"startcoinAirDrop/dao"
 	"startcoinAirDrop/models"
-	"strings"
 )
 
 type reqData struct {
@@ -45,47 +42,29 @@ func GetRecrods(c echo.Context) error {
 		ErrMsg: "success",
 		Data: list,
 	}
+	log.Info("----->", list[0].Status)
 	return c.JSON(http.StatusOK, rlt)
 }
 
-func GetStatus(functionId string, typeArgs interface{}, list dao.RecordList) {
-	var listParams []interface{}
-	for _, v := range list {
-		p := &reqParams{
-			FunctionId: functionId,
-			TypeArgs: typeArgs,
-			Args: [] interface{}{v.OwnerAddress, v.AirdropId, v.Root, v.Idx},
+func UpdateStatus(c echo.Context) error {
+	id := c.QueryParam("id")
+	status := c.QueryParam("status")
+	addr := c.QueryParam("address")
+	networVersion := c.QueryParam("networkVersion")
+	err := dao.Record{}.UpdateStatus(addr, id, status, networVersion)
+	if err != nil {
+		rlt := &models.Template{
+			ErrNo: http.StatusExpectationFailed,
+			ErrMsg: "Update failed",
+			Data: nil,
 		}
-		listParams = append(listParams, p)
-		log.Info(p)
+		log.Error(err)
+		return c.JSON(http.StatusOK, rlt)
 	}
-	args := &reqData{
-		Id: 101,
-		Jsonrpc: "2.0",
-		Method: "contract.call_v2",
-		Params: listParams,
+	rlt := &models.Template{
+		ErrNo: http.StatusOK,
+		ErrMsg: "success",
+		Data: nil,
 	}
-	jsons, err := json.Marshal(args)
-	log.Error(err)
-	rlt := string(jsons)
-	log.Info("=============>", args)
-	log.Info("=============>", listParams)
-	log.Info("=============>", rlt)
-	jsoninfo := strings.NewReader(rlt)
-	req, err := http.NewRequest("POST", "https://halley-seed.starcoin.org", jsoninfo)
-	req.Header.Set("Content-Type", "application/json")
-	if err != nil {
-		log.Error("Request ERROR =>", err)
-	}
-	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		log.Error("Request Resp ERROR =>", err)
-	}
-	defer resp.Body.Close()
-	rl, _ := ioutil.ReadAll(resp.Body)
-	log.Info("******>", resp)
-	log.Info("******>", resp.Body)
-	log.Info("********", rl)
+	return c.JSON(http.StatusOK, rlt)
 }
-

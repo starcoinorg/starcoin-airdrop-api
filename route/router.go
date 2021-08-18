@@ -21,5 +21,6 @@ func Run() {
 	e.GET("/getProjectList", controllers.GetList)
 	e.POST("/uploadProject", controllers.GetExcel)
 	e.GET("/getlist", controllers.GetRecrods)
+	e.GET("/updatestatus", controllers.UpdateStatus)
 	e.Logger.Fatal(e.Start(":1323"))
 }
