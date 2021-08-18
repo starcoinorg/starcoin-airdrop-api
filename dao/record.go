@@ -25,14 +25,14 @@ type Record struct {
 
 type RecordList []Record
 
-func (r Record) GerRecords (addr string) (RecordList, error) {
+func (r Record) GerRecords (addr string, networkVersion string) (RecordList, error) {
 	list := RecordList{}
-	sql := "SELECT * FROM airdrop_records WHERE address=?"
-	err := DB.Select(&list, sql, addr)
+	sql := "SELECT * FROM airdrop_records WHERE address=? AND network_version = ?"
+	err := DB.Select(&list, sql, addr, networkVersion)
 	if err != nil {
+		log.Error(err)
 		return nil, err
 	}
-	log.Info("***********>", list[0])
 	return list, nil
 }
 

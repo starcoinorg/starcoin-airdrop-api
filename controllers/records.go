@@ -21,11 +21,10 @@ type reqParams struct {
 	Args interface{} `json:"args"`
 }
 
-func GetRecrods(c echo.Context) error {
+func GetRecords(c echo.Context) error {
 	addr := c.QueryParam("addr")
-	// functionId := c.QueryParam("function_id")
-	// typeArgs := []string{c.QueryParam("type_args")}
-	list, err := dao.Record{}.GerRecords(addr)
+	networkVersion := c.QueryParam("networkVersion")
+	list, err := dao.Record{}.GerRecords(addr, networkVersion)
 
 	if err != nil {
 		log.Error("Get Records Error => ", err)
@@ -42,7 +41,6 @@ func GetRecrods(c echo.Context) error {
 		ErrMsg: "success",
 		Data: list,
 	}
-	log.Info("----->", list[0].Status)
 	return c.JSON(http.StatusOK, rlt)
 }
 
