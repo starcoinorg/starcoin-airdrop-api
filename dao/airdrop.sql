@@ -16,13 +16,42 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `airdrop_amount`
+-- Table structure for table `airdrop_project_list`
 --
 
-DROP TABLE IF EXISTS `airdrop_amount`;
+DROP TABLE IF EXISTS `airdrop_project_list`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `airdrop_amount` (
+CREATE TABLE `airdrop_project_list` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `token` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
+  `project` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
+  `total_amount` float DEFAULT NULL,
+  `valid_amount` float DEFAULT NULL,
+  `expire_time` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `create_time` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `airdrop_project_list`
+--
+
+LOCK TABLES `airdrop_project_list` WRITE;
+/*!40000 ALTER TABLE `airdrop_project_list` DISABLE KEYS */;
+INSERT INTO `airdrop_project_list` VALUES (1,'STC','project1',10,8,'2021-08-25 18:00:00','2020-08-01 18:00:00'),(2,'USDT','project2',9,4,'2021-08-09 20:00:00','2021-08-01 20:00:00'),(3,'STC','project3',11,2,'2021-08-09 20:00:00','2021-08-01 20:00:00');
+/*!40000 ALTER TABLE `airdrop_project_list` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `airdrop_records`
+--
+
+DROP TABLE IF EXISTS `airdrop_records`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `airdrop_records` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `amount` int(10) DEFAULT '0',
@@ -35,18 +64,45 @@ CREATE TABLE `airdrop_amount` (
   `status` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `network_version` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
+  `end_at` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `airdrop_records`
+--
+
+LOCK TABLES `airdrop_records` WRITE;
+/*!40000 ALTER TABLE `airdrop_records` DISABLE KEYS */;
+INSERT INTO `airdrop_records` VALUES (5,'0x3f19d5422824f47e6c021978cee98f35',1000000000,0,'[\"0x2df1673b2fd2df6712b5cc3e3c9c75833a26e8a7b3aa4f5fded7d8d052829f90\"]',1,1629277067307,'0x7beb045f2dea2f7fe50ede88c3e19a72','0x060bf7bd703ebb85380710489359445b4723d60fdf236a65736ba132f6e5a0f6',NULL,'2021-08-18 17:30:04','2021-08-18 17:32:16','253','2021-08-30 17:30:53'),(6,'0xd7f20befd34b9f1ab8aeae98b82a5a51',1000000000,1,'[\"0xe20e1f54dc78d9f6672c1364c17c2bac8126650d43e1c93e112c3572f9fde7b5\"]',1,1629277067307,'0x7beb045f2dea2f7fe50ede88c3e19a72','0x060bf7bd703ebb85380710489359445b4723d60fdf236a65736ba132f6e5a0f6','2','2021-08-18 17:30:40','2021-08-18 17:48:32','253','2021-08-30 17:30:53');
+/*!40000 ALTER TABLE `airdrop_records` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `airdrop_token_list`
+--
+
+DROP TABLE IF EXISTS `airdrop_token_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `airdrop_token_list` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `symbol` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
+  `code` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `airdrop_amount`
+-- Dumping data for table `airdrop_token_list`
 --
 
-LOCK TABLES `airdrop_amount` WRITE;
-/*!40000 ALTER TABLE `airdrop_amount` DISABLE KEYS */;
-INSERT INTO `airdrop_amount` VALUES (1,'0x3f19d5422824f47e6c021978cee98f35',1000000000,0,'[\"0x94e737a810e48da0ff6ff7a2607312386412492f2a94350276e9709a5f1e4163\"]',1,1629182019309,'0x7beb045f2dea2f7fe50ede88c3e19a72','0x85a52a442d0e8af7bf304643d548451464fb20148e4cc48e9991676c87f047a0',NULL,'2021-08-17 14:36:35','2021-08-17 14:40:40'),(2,'0xd7f20befd34b9f1ab8aeae98b82a5a51',1000000000,1,'[\"0xebc10871d2e860fe345c949d4d41d1e001cbc980c5b0fec1eb62989f073b5bf7\"]',2,1629182019309,'0x7beb045f2dea2f7fe50ede88c3e19a72','0x85a52a442d0e8af7bf304643d548451464fb20148e4cc48e9991676c87f047a0',NULL,'2021-08-17 14:36:45','2021-08-17 14:40:40');
-/*!40000 ALTER TABLE `airdrop_amount` ENABLE KEYS */;
+LOCK TABLES `airdrop_token_list` WRITE;
+/*!40000 ALTER TABLE `airdrop_token_list` DISABLE KEYS */;
+INSERT INTO `airdrop_token_list` VALUES (1,'STC','0x1::STC::STC\n0x1::STC::STC\n0x1::STC::STC'),(2,'USDT','0xxxxxxx:USDT:USDT\n');
+/*!40000 ALTER TABLE `airdrop_token_list` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -58,4 +114,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-17 14:40:57
+-- Dump completed on 2021-08-18 22:48:03
