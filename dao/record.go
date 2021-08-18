@@ -16,10 +16,11 @@ type Record struct {
 	OwnerAddress string `db:"owner_address"`
 	Root string `db:"root"`
 	Status int32 `db:"status"`
-	Create string `db:"created_at"`
-	Update string `db:"updated_at"`
+	CreateAt string `db:"created_at"`
+	UpdateAt string `db:"updated_at"`
 	NetworkVersion string `db:"network_version"`
-	End string `db:"end_at"`
+	EndAt string `db:"end_at"`
+	StartAt string `db:"start_at"`
 }
 
 type RecordList []Record
