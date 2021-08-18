@@ -20,5 +20,6 @@ func Run() {
 	e.Use(middleware.CORS())
 	e.GET("/getProjectList", controllers.GetList)
 	e.POST("/uploadProject", controllers.GetExcel)
+	e.GET("/getlist", controllers.GetRecrods)
 	e.Logger.Fatal(e.Start(":1323"))
 }
