@@ -10,7 +10,7 @@ type Record struct {
 	Address string `db:"address"`
 	Amount string `db:"amount"`
 	Idx string `db:"idx"`
-	Proof interface{} `db:"proof"`
+	Proof string `db:"proof"`
 	ProjectId string `db:"project_id"`
 	AirdropId int64 `db:"air_drop_id"`
 	OwnerAddress string `db:"owner_address"`
