@@ -8,7 +8,7 @@ require (
 	github.com/jmoiron/sqlx v1.3.4
 	github.com/labstack/echo v3.3.10+incompatible
 	github.com/labstack/gommon v0.3.0
-	github.com/spf13/viper v1.8.1 // indirect
+	github.com/spf13/viper v1.8.1
 	github.com/stretchr/testify v1.7.0 // indirect
 	github.com/tealeg/xlsx/v3 v3.2.3 // indirect
 	github.com/valyala/fasttemplate v1.2.1 // indirect
