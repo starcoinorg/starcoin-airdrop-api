@@ -9,16 +9,16 @@ import (
 )
 
 type reqData struct {
-	Id int `json:"id"`
-	Jsonrpc string `json:"jsonrpc"`
-	Method string `json:"method"`
-	Params interface{} `json:"params"`
+	Id      int         `json:"id"`
+	Jsonrpc string      `json:"jsonrpc"`
+	Method  string      `json:"method"`
+	Params  interface{} `json:"params"`
 }
 
 type reqParams struct {
-	FunctionId string `json:"function_id"`
-	TypeArgs interface{} `json:"type_args"`
-	Args interface{} `json:"args"`
+	FunctionId string      `json:"function_id"`
+	TypeArgs   interface{} `json:"type_args"`
+	Args       interface{} `json:"args"`
 }
 
 func GetRecords(c echo.Context) error {
@@ -29,17 +29,17 @@ func GetRecords(c echo.Context) error {
 	if err != nil {
 		log.Error("Get Records Error => ", err)
 		rlt := &models.Template{
-			ErrNo: http.StatusExpectationFailed,
+			ErrNo:  http.StatusExpectationFailed,
 			ErrMsg: "Get Records Error",
-			Data: nil,
+			Data:   nil,
 		}
 		return c.JSON(http.StatusOK, rlt)
 	}
 	// GetStatus(functionId, typeArgs, list)
 	rlt := &models.Template{
-		ErrNo: http.StatusOK,
+		ErrNo:  http.StatusOK,
 		ErrMsg: "success",
-		Data: list,
+		Data:   list,
 	}
 	return c.JSON(http.StatusOK, rlt)
 }
@@ -48,21 +48,20 @@ func UpdateStatus(c echo.Context) error {
 	id := c.QueryParam("id")
 	status := c.QueryParam("status")
 	addr := c.QueryParam("address")
-	networVersion := c.QueryParam("networkVersion")
-	err := dao.Record{}.UpdateStatus(addr, id, status, networVersion)
+	err := dao.Record{}.UpdateStatus(addr, id, status)
 	if err != nil {
 		rlt := &models.Template{
-			ErrNo: http.StatusExpectationFailed,
+			ErrNo:  http.StatusExpectationFailed,
 			ErrMsg: "Update failed",
-			Data: nil,
+			Data:   nil,
 		}
 		log.Error(err)
 		return c.JSON(http.StatusOK, rlt)
 	}
 	rlt := &models.Template{
-		ErrNo: http.StatusOK,
+		ErrNo:  http.StatusOK,
 		ErrMsg: "success",
-		Data: nil,
+		Data:   nil,
 	}
 	return c.JSON(http.StatusOK, rlt)
 }

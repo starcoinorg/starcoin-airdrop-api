@@ -1,33 +1,38 @@
 package dao
 
 import (
-	"github.com/labstack/gommon/log"
 	"strconv"
+
+	"github.com/labstack/gommon/log"
 )
 
 type Record struct {
-	Id int32 `db:"id"`
-	Address string `db:"address"`
-	Amount string `db:"amount"`
-	Idx string `db:"idx"`
-	Proof string `db:"proof"`
-	ProjectId string `db:"project_id"`
-	AirdropId int64 `db:"air_drop_id"`
-	OwnerAddress string `db:"owner_address"`
-	Root string `db:"root"`
-	Status int32 `db:"status"`
-	CreateAt string `db:"created_at"`
-	UpdateAt string `db:"updated_at"`
+	Id             int32  `db:"id"`
+	Address        string `db:"address"`
+	Amount         string `db:"amount"`
+	Idx            string `db:"idx"`
+	Proof          string `db:"proof"`
+	Status         int32  `db:"status"`
+	AirdropId      int64  `db:"airdrop_id"`
+	Name           string `db:"name"`
+	Symbol         string `db:"token_symbol"`
+	Precision      string `db:"token_precision"`
+	Icon           string `db:"token_icon"`
+	StartAt        string `db:"start_at"`
+	EndAt          string `db:"end_at"`
+	OwnerAddress   string `db:"owner_address"`
+	Root           string `db:"root"`
 	NetworkVersion string `db:"network_version"`
-	EndAt string `db:"end_at"`
-	StartAt string `db:"start_at"`
 }
 
 type RecordList []Record
 
-func (r Record) GerRecords (addr string, networkVersion string) (RecordList, error) {
+func (r Record) GerRecords(addr string, networkVersion string) (RecordList, error) {
 	list := RecordList{}
-	sql := "SELECT * FROM airdrop_records WHERE address=? AND network_version = ?"
+	sql := `select a.id, a.address, a.amount, a.idx, a.proof, a.status, a.airdrop_id, b.name, b.token_symbol, b.token_precision, b.token_icon, b.start_at, b.end_at, b.owner_address, b.root, b.network_version 
+			from airdrop_records a join airdrop_projects b on a.airdrop_id = b.id
+			where a.address=? and b.network_version = ?
+			order by a.id desc`
 	err := DB.Select(&list, sql, addr, networkVersion)
 	if err != nil {
 		log.Error(err)
@@ -36,10 +41,10 @@ func (r Record) GerRecords (addr string, networkVersion string) (RecordList, err
 	return list, nil
 }
 
-func (r Record) UpdateStatus (addr string, id string, status string, networkVersion string) error {
-	recordId,_ := strconv.Atoi(id)
-	recordStatus,_ := strconv.Atoi(status)
-	sql := "UPDATE airdrop_records SET status = ? WHERE address = ? AND id = ? and network_version = ?"
-	_, err := DB.Exec(sql, recordStatus, addr, recordId, networkVersion)
+func (r Record) UpdateStatus(addr string, id string, status string) error {
+	recordId, _ := strconv.Atoi(id)
+	recordStatus, _ := strconv.Atoi(status)
+	sql := "UPDATE airdrop_records SET status = ? WHERE address = ? AND id = ?"
+	_, err := DB.Exec(sql, recordStatus, addr, recordId)
 	return err
 }
