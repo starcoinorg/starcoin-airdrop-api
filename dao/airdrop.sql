@@ -24,23 +24,34 @@ DROP TABLE IF EXISTS `airdrop_projects`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `airdrop_projects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `token` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `project` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `total_amount` float DEFAULT NULL,
-  `valid_amount` float DEFAULT NULL,
-  `expire_time` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
-  `create_time` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `name` varchar(50) NOT NULL DEFAULT '',
+  `token` varchar(45) NOT NULL DEFAULT '0x1::STC::STC',
+  `token_icon` varchar(100)  NULL DEFAULT '',
+  `token_symbol` varchar(45) NOT NULL DEFAULT 'STC',
+  `token_precision` int(10) DEFAULT 9,
+  `total_amount` bigint DEFAULT 0,
+  `valid_amount` bigint DEFAULT 0,
+  `start_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `end_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `owner_address` varchar(45) DEFAULT NULL,
+  `root` varchar(100) DEFAULT NULL,
+  `network_version` int(10) DEFAULT 0,
+  `create_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
+CREATE INDEX idx_projects_network_version ON airdrop_projects(network_version);
 --
 -- Dumping data for table `airdrop_projects`
 --
 
+alter 
+
 LOCK TABLES `airdrop_projects` WRITE;
 /*!40000 ALTER TABLE `airdrop_projects` DISABLE KEYS */;
-INSERT INTO `airdrop_projects` VALUES (1,'STC','project1',10,8,'2021-08-25 18:00:00','2020-08-01 18:00:00'),(2,'USDT','project2',9,4,'2021-08-09 20:00:00','2021-08-01 20:00:00'),(3,'STC','project3',11,2,'2021-08-09 20:00:00','2021-08-01 20:00:00');
+INSERT INTO `airdrop_projects` (id, name, token, token_symbol, token_precision, start_at, end_at) VALUES (null,'投票#0奖励','0x1::STC::STC', 'STC', 9, '2021-08-20 10:00:00','2021-09-04 23:59:59');
+update airdrop_projects set owner_address='0x3f19d5422824f47e6c021978cee98f35', root='0xe15e74f9dd1b347e94a96cf945bd82a873dc7cdf2c13fd7edd330cf524ff3ed5', network_version='253' where id = 1;
 /*!40000 ALTER TABLE `airdrop_projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,27 +68,23 @@ CREATE TABLE `airdrop_records` (
   `amount` int(10) DEFAULT 0,
   `idx` int(10) DEFAULT 0,
   `proof` varchar(500) DEFAULT NULL,
-  `project_id` int(10) DEFAULT 0,
-  `air_drop_id` bigint(20) DEFAULT 0,
-  `owner_address` varchar(45) DEFAULT NULL,
-  `root` varchar(100) DEFAULT NULL,
+  `airdrop_id` int(11) NOT NULL DEFAULT 0,
   `status` int(10) DEFAULT 0,
-  `network_version` int(10) DEFAULT 0,
-  `start_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `end_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+ALTER TABLE airdrop_records ADD CONSTRAINT fk_airdrop_id FOREIGN KEY (airdrop_id) REFERENCES airdrop_projects (id);
+CREATE INDEX idx_records_address ON airdrop_records(address);
 --
 -- Dumping data for table `airdrop_records`
 --
 
 LOCK TABLES `airdrop_records` WRITE;
 /*!40000 ALTER TABLE `airdrop_records` DISABLE KEYS */;
-INSERT INTO `airdrop_records` VALUES (5,'0x3f19d5422824f47e6c021978cee98f35',1000000000,0,'[\"0x2df1673b2fd2df6712b5cc3e3c9c75833a26e8a7b3aa4f5fded7d8d052829f90\"]',1,1629277067307,'0x7beb045f2dea2f7fe50ede88c3e19a72','0x060bf7bd703ebb85380710489359445b4723d60fdf236a65736ba132f6e5a0f6',NULL,'2021-08-18 17:30:04','2021-08-18 23:03:56',253,'2021-08-30 17:30:53','2021-08-18 17:30:04'),(6,'0xd7f20befd34b9f1ab8aeae98b82a5a51',1000000000,1,'[\"0xe20e1f54dc78d9f6672c1364c17c2bac8126650d43e1c93e112c3572f9fde7b5\"]',1,1629277067307,'0x7beb045f2dea2f7fe50ede88c3e19a72','0x060bf7bd703ebb85380710489359445b4723d60fdf236a65736ba132f6e5a0f6','2',253,'2021-08-18 17:30:40','2021-08-18 23:03:56','2021-08-30 17:30:53','2021-08-18 17:30:04');
+insert into airdrop_records (id, address, amount, idx, proof, status, airdrop_id) values (null, '0x3f19d5422824f47e6c021978cee98f35', 1000000000, 0, '["0x5b35a70b0eba17ede94fdf2664e87438aa71e5d756220a8f8072482a9e9a0d5b"]', '0', 1);
 /*!40000 ALTER TABLE `airdrop_records` ENABLE KEYS */;
 UNLOCK TABLES;
 
