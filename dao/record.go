@@ -41,10 +41,10 @@ func (r Record) GerRecords(addr string, networkVersion string) (RecordList, erro
 	return list, nil
 }
 
-func (r Record) UpdateStatus(addr string, id string, status string) error {
+func (r Record) UpdateStatus(id string, status string) error {
 	recordId, _ := strconv.Atoi(id)
 	recordStatus, _ := strconv.Atoi(status)
-	sql := "UPDATE airdrop_records SET status = ? WHERE address = ? AND id = ?"
-	_, err := DB.Exec(sql, recordStatus, addr, recordId)
+	sql := "UPDATE airdrop_records SET status = ? WHERE id = ?"
+	_, err := DB.Exec(sql, recordStatus, recordId)
 	return err
 }

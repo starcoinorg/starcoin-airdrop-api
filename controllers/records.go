@@ -1,11 +1,12 @@
 package controllers
 
 import (
-	"github.com/labstack/echo"
-	"github.com/labstack/gommon/log"
 	"net/http"
 	"startcoinAirDrop/dao"
 	"startcoinAirDrop/models"
+
+	"github.com/labstack/echo"
+	"github.com/labstack/gommon/log"
 )
 
 type reqData struct {
@@ -47,8 +48,7 @@ func GetRecords(c echo.Context) error {
 func UpdateStatus(c echo.Context) error {
 	id := c.QueryParam("id")
 	status := c.QueryParam("status")
-	addr := c.QueryParam("address")
-	err := dao.Record{}.UpdateStatus(addr, id, status)
+	err := dao.Record{}.UpdateStatus(id, status)
 	if err != nil {
 		rlt := &models.Template{
 			ErrNo:  http.StatusExpectationFailed,
