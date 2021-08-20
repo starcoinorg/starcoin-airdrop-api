@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: airdrop-api-deployment
+  labels:
+    app: airdrop-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: airdrop-api
+  template:
+    metadata:
+      labels:
+        app: airdrop-api
+    spec:
+      containers:
+        - name: airdrop-api
+          image: starcoin/starcoin-airdrop-api:0.1.0
+          ports:
+            - containerPort: 8081
+          env:
+            - name: STARCOIN_AIRDROP_MYSQL_HOST
+              value: "starcoin-db-2.c0bz9kehdvnb.ap-northeast-1.rds.amazonaws.com"
+            - name: STARCOIN_AIRDROP_MYSQL_PORT
+              value: "3306"  
+            - name: STARCOIN_EVENT_MYSQL_DB
+              value: "airdrop"
+            - name: STARCOIN_AIRDROP_MYSQL_DB
+              value: "starcoin"
+            - name: STARCOIN_AIRDROP_MYSQL_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-pwd
+                  key: password
