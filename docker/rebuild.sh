@@ -3,4 +3,4 @@
 ./stop.sh
 ./build.sh
 ./run.sh
-docker logs -f starcoin-explorer-api
+docker logs -f starcoin-airdrop-api

@@ -50,12 +50,12 @@ CREATE TABLE `airdrop_projects` (
 DROP TABLE IF EXISTS `airdrop_records`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `airdrop_records` (
+CREATE TABLE `airdrop_records2` (
   `id` int NOT NULL AUTO_INCREMENT,
   `address` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `amount` int DEFAULT '0',
+  `amount` bigint(20) unsigned DEFAULT '0',
   `idx` int DEFAULT '0',
-  `proof` varchar(500) COLLATE utf8mb4_bin DEFAULT NULL,
+  `proof` varchar(1000) COLLATE utf8mb4_bin DEFAULT NULL,
   `airdrop_id` int NOT NULL DEFAULT '0',
   `status` int DEFAULT '0',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,

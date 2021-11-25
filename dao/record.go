@@ -15,6 +15,7 @@ type Record struct {
 	Status         int32  `db:"status"`
 	AirdropId      int64  `db:"airdrop_id"`
 	Name           string `db:"name"`
+	NameEN         string `db:"name_en"`
 	Symbol         string `db:"token_symbol"`
 	Precision      string `db:"token_precision"`
 	Icon           string `db:"token_icon"`
@@ -29,7 +30,7 @@ type RecordList []Record
 
 func (r Record) GerRecords(addr string, networkVersion string) (RecordList, error) {
 	list := RecordList{}
-	sql := `select a.id, a.address, a.amount, a.idx, a.proof, a.status, a.airdrop_id, b.name, b.token_symbol, b.token_precision, b.token_icon, b.start_at, b.end_at, b.owner_address, b.root, b.network_version 
+	sql := `select a.id, a.address, a.amount, a.idx, a.proof, a.status, a.airdrop_id, b.name, b.name_en, b.token_symbol, b.token_precision, b.token_icon, b.start_at, b.end_at, b.owner_address, b.root, b.network_version 
 			from airdrop_records a join airdrop_projects b on a.airdrop_id = b.id
 			where a.address=? and b.network_version = ?
 			order by a.id desc`

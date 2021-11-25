@@ -1,10 +1,14 @@
-# start pods
+# start/restart pods
+cd kube
 kubectl apply -f ./airdrop-api-deployment.yaml
 
 # check pods
 $kubectl get pods                       
 NAME                                               READY   STATUS    RESTARTS   AGE
 airdrop-api-deployment-847564d655-j8xpw            1/1     Running   0          7m16s
+
+# check logs
+kubectl logs -f airdrop-api-deployment-847564d655-j8xpw
 
 # start service
 kubectl apply -f ./service-airdrop-api.yaml
