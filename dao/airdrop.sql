@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `airdrop_projects`;
 CREATE TABLE `airdrop_projects` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
-  `token` varchar(45) COLLATE utf8mb4_bin NOT NULL DEFAULT '0x1::STC::STC',
+  `token` varchar(180) COLLATE utf8mb4_bin NOT NULL DEFAULT '0x1::STC::STC',
   `token_icon` varchar(100) COLLATE utf8mb4_bin DEFAULT '',
   `token_symbol` varchar(45) COLLATE utf8mb4_bin NOT NULL DEFAULT 'STC',
   `token_precision` int DEFAULT '9',
