@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: airdrop-api
-          image: starcoin/starcoin-airdrop-api:0.2.0
+          image: starcoin/starcoin-airdrop-api:0.2.1
           ports:
             - containerPort: 8081
           env:

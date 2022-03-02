@@ -2,7 +2,7 @@
 
 set -e
 
-IMAGE_NAME="starcoin-airdrop-api"
+IMAGE_NAME="starcoin/starcoin-airdrop-api"
 IMAGE_LATEST_TAG=$IMAGE_NAME:latest
 
 echo "=== Building  image ${IMAGE_LATEST_TAG} ==="

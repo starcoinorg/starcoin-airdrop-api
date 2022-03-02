@@ -22,3 +22,9 @@
 
 6. inspect a running container.
 `docker exec -it <CONTAINER_ID> /bin/bash`
+
+7. tag
+`docker tag starcoin/starcoin-airdrop-api:latest starcoin/starcoin-airdrop-api:0.2.1`
+
+8. publish to docker hub
+`docker push starcoin/starcoin-airdrop-api:0.2.1`
